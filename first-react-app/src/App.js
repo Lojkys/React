@@ -1,24 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button';
+import Display from './components/Display';
+
+class SimpleGoldenAcornApp extends React.Component {
+  constructor() {
+    super();
+    this.addOne = this.addOne.bind(this);
+    this.minusOne = this.minusOne.bind(this);
+    this.state = {
+      number: 0
+    };
+  }
+
+  addOne() {
+    this.setState(previousState => {
+      return {
+        number: previousState.number + 1
+      };
+    });
+  }
+
+  minusOne() {
+    this.setState(previousState => {
+      return {
+        number: previousState.number - 1
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Button onClick={this.addOne}>Roll One</Button>
+        <Display>{this.state.number}</Display>
+        <Button onClick={this.minusOne}>Smoke one</Button>
+      </div>
+    );
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <SimpleGoldenAcornApp />
     </div>
   );
 }
